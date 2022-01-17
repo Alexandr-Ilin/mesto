@@ -1,0 +1,13 @@
+.profile__add-button {
+  display: inline-block;
+  background-color: black;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  margin-left: auto;
+}
+
+.profile__add-button:hover {
+  opacity: .6;
+}

@@ -1,0 +1,14 @@
+.form__item {
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+}
+
+.form__item:last-child {
+  margin-bottom: 48px;
+}

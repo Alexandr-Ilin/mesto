@@ -1,0 +1,10 @@
+.element__heart {
+  border: none;
+  /* background-color: white; */
+  cursor: pointer;
+  transition: opacity .4s linear;
+}
+
+.element__heart:hover {
+  opacity: .6;
+}
