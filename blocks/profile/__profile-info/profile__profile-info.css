@@ -1,0 +1,10 @@
+.profile__profile-info {
+  max-width: 60%;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__profile-info {
+    margin-bottom: 36px;
+    max-width: 100%;
+  }
+}
