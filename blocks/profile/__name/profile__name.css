@@ -3,11 +3,8 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  /* or 114% */
   color: #fff;
   margin-block: 0;
-  display: inline-block;
-  /* margin-bottom: 16px; */
   margin: 0;
   margin-right: 18px;
   /*переполнение*/
@@ -18,8 +15,6 @@
 
 @media screen and (max-width: 940px) {
   .profile__name {
-    font-style: normal;
-    font-weight: 500;
     font-size: 27px;
     line-height: 33px;
     text-align: center;
