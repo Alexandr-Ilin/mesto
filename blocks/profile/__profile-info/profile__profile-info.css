@@ -2,7 +2,7 @@
   max-width: 60%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 940px) {
   .profile__profile-info {
     margin-bottom: 36px;
     max-width: 100%;

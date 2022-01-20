@@ -47,12 +47,12 @@ function formSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 
-// сердечко
+// Like
 
-let heartButton = document.querySelector('.element__heart');
+// let heartButton = document.querySelector('.element__heart');
 
-function heartActive() {
-  heartButton.classList.toggle('element__heart_active');
-};
+// function heartActive() {
+//   heartButton.classList.toggle('element__heart_active');
+// };
 
-heartButton.addEventListener('click', heartActive);
+// heartButton.addEventListener('click', heartActive);

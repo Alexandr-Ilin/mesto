@@ -5,8 +5,15 @@
   padding-bottom: 41px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 940px) {
   .header {
     padding-bottom: 31.6px;
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 641px) {
+  .header {
+    max-width: 282px;
   }
 }
