@@ -1,6 +1,6 @@
 .profile__edit-info {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   /*16px от базовой линии*/
   margin-bottom: 9px;
 }
