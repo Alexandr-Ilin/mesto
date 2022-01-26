@@ -1,6 +1,5 @@
 .profile__add-button {
-  display: inline-block;
-  background-color: #000;
+  background-color: transparent;
   background-image: url(../../../images/VectorAdd.svg);
   background-position: center;
   background-repeat: no-repeat;
