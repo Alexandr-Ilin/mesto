@@ -1,51 +1,30 @@
-let popup = document.querySelector('.popup');
-
-//Открыть popup
-let editButton = document.querySelector('.profile__edit-button');
-editButton.addEventListener('click', function() {
-  popup.classList.add('popup_opened');
-});
-
-//Закрыть popup
-function close() {
-  popup.classList.remove('popup_opened');
-};
-let closeButton = document.querySelector('.popup__close');
-closeButton.addEventListener('click', close);
-
-// Находим форму в DOM
-let formElement = document.querySelector('.form');
-// Находим поля формы в DOM
+const popup = document.querySelector('.popup');
+const editButton = document.querySelector('.profile__edit-button');
+const closeButton = document.querySelector('.popup__close');
+let nameProfile = document.querySelector('.profile__name');
+let jobProfile = document.querySelector('.profile__about-self');
+const formElement = document.querySelector('.form');
 let nameInput = formElement.querySelector('.form__item_type_name');
 let jobInput = formElement.querySelector('.form__item_type_about');
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+//Открыть popup
+function openPopup() {
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
+  popup.classList.add('popup_opened');
+};
+
+//Закрыть popup
+function closePopup() {
+  popup.classList.remove('popup_opened');
+};
 
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-  // Так мы можем определить свою логику отправки.
-  // О том, как это делать, расскажем позже.
-
-  // Получите значение полей jobInput и nameInput из свойства value
-  let newName = nameInput.value;
-  let newJob = jobInput.value;
-
-  // Выберите элементы, куда должны быть вставлены значения полей
-  let name = document.querySelector('.profile__name');
-  let job = document.querySelector('.profile__about-self');
-
-  // Вставьте новые значения с помощью textContent
-  name.textContent = newName;
-  job.textContent = newJob;
-
-  close();
-
-  nameInput.value = "";
-  jobInput.value = "";
+  nameProfile.textContent = nameInput.value;
+  jobProfile.textContent = jobInput.value;
+  closePopup();
 }
-
-formElement.addEventListener('submit', formSubmitHandler);
 
 // Like
 
@@ -56,3 +35,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 // };
 
 // heartButton.addEventListener('click', heartActive);
+// Слушатели событий
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
+formElement.addEventListener('submit', formSubmitHandler);
