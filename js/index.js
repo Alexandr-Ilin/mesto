@@ -24,6 +24,29 @@ const initialCards = [{
   }
 ];
 
+//template
+const elementsTemplate = document.querySelector('.elements__template').content;
+const elements = document.querySelector('.elements');
+
+// function render() {
+
+//   initialCards.forEach(renderElements);
+// }
+
+function renderElements() {
+  for (i = 0; i < initialCards.length; i++) {
+    const newElement = elementsTemplate.cloneNode(true);
+    newElement.querySelector('.element__place').textContent = initialCards[i].name;
+    newElement.querySelector('.element__image').setAttribute('src', initialCards[i].link);
+    elements.append(newElement);
+  };
+};
+
+renderElements()
+
+
+//конец template
+
 const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const closeButton = document.querySelector('.popup__close');
