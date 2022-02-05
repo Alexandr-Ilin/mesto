@@ -28,21 +28,32 @@ const initialCards = [{
 const elementsTemplate = document.querySelector('.elements__template').content;
 const elements = document.querySelector('.elements');
 
-// function render() {
+function renderCards() {
+  initialCards.forEach(creatCard);
+}
 
-//   initialCards.forEach(renderElements);
-// }
-
-function renderElements() {
-  for (i = 0; i < initialCards.length; i++) {
-    const newElement = elementsTemplate.cloneNode(true);
-    newElement.querySelector('.element__place').textContent = initialCards[i].name;
-    newElement.querySelector('.element__image').setAttribute('src', initialCards[i].link);
-    elements.append(newElement);
-  };
+function creatCard(item) {
+  const newElement = elementsTemplate.cloneNode(true);
+  newElement.querySelector('.element__place').textContent = item.name;
+  newElement.querySelector('.element__image').src = item.link;
+  newElement.querySelector('.element__image').alt = item.name;
+  elements.append(newElement);
 };
 
-renderElements()
+renderCards()
+
+//initialCards.forEach
+
+// function renderElements() {
+//   for (i = 0; i < initialCards.length; i++) {
+//     const newElement = elementsTemplate.cloneNode(true);
+//     newElement.querySelector('.element__place').textContent = initialCards[i].name;
+//     newElement.querySelector('.element__image').setAttribute('src', initialCards[i].link);
+//     elements.append(newElement);
+//   };
+// };
+
+// renderElements()
 
 
 //конец template
