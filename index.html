@@ -52,11 +52,11 @@
       </li>
     </template>
 
-    <div class="popup popup__edit-profile">
+    <div class="popup popup_edit_profile">
       <div class="popup__form-container">
         <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
         <h2 class="popup__form-header">Редактировать профиль</h2>
-        <form action="#" class="form" name="edit-profile">
+        <form action="#" class="form form_edit_profile" name="edit-profile">
           <input required minlength="2" type="text" class="form__item form__item_type_name" name="input-name" placeholder="Имя">
           <input required minlength="2" type="text" class="form__item form__item_type_about" name="input-about" placeholder="О себе">
           <button type="submit" class="form__submit-button">Сохранить</button>
@@ -64,14 +64,14 @@
       </div>
     </div>
 
-    <div class="popup popup__add-card">
+    <div class="popup popup_add_card">
       <div class="popup__form-container">
         <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
         <h2 class="popup__form-header">Новое место</h2>
-        <form action="#" class="form" name="edit-profile">
-          <input required minlength="2" type="text" class="form__item form__item_type_name" name="input-place" placeholder="Название">
-          <input required minlength="2" type="text" class="form__item form__item_type_about" name="input-url" placeholder="Ссылка на картинку">
-          <button type="submit" class="form__submit-button">Сохранить</button>
+        <form action="#" class="form form_edit_place" name="edit-profile">
+          <input required minlength="2" type="text" class="form__item form__item_type_place" name="input-place" placeholder="Название">
+          <input required minlength="2" type="url" class="form__item form__item_type_link" name="input-link" placeholder="Ссылка на картинку">
+          <button type="submit" class="form__submit-button">Создать</button>
         </form>
       </div>
     </div>

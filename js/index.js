@@ -24,24 +24,6 @@ const initialCards = [{
   }
 ];
 
-//template
-const elementsTemplate = document.querySelector('.elements__template').content;
-const elements = document.querySelector('.elements');
-
-function renderCards() {
-  initialCards.forEach(creatCard);
-};
-
-function creatCard(item) {
-  const newElement = elementsTemplate.cloneNode(true);
-  newElement.querySelector('.element__place').textContent = item.name;
-  newElement.querySelector('.element__image').src = item.link;
-  newElement.querySelector('.element__image').alt = item.name;
-  elements.append(newElement);
-};
-
-renderCards()
-
 //initialCards.forEach
 
 // function renderElements() {
@@ -58,23 +40,55 @@ renderCards()
 
 //конец template
 
-const popup = document.querySelectorAll('.popup');
+//const popup = document.querySelectorAll('.popup');
 
-const popupEditProfile = document.querySelector('.popup__edit-profile')
-const popupAddCard = document.querySelector('.popup__add-card')
+const popupEditProfile = document.querySelector('.popup_edit_profile')
+const popupAddCard = document.querySelector('.popup_add_card')
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button')
 
 const closeButtons = document.querySelectorAll('.popup__close');
-
+//для редактирования профиля
 const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__about-self');
-const formElement = document.querySelector('.form');
-const nameInput = formElement.querySelector('.form__item_type_name');
-const jobInput = formElement.querySelector('.form__item_type_about');
+
+const editFormElement = document.querySelector('.form_edit_profile');
+const nameInput = editFormElement.querySelector('.form__item_type_name');
+const jobInput = editFormElement.querySelector('.form__item_type_about');
+//для добавления места
+const addFormElement = document.querySelector('.form_edit_place')
+const inputPlace = document.querySelector('.form__item_type_place');
+const inputLink = document.querySelector('.form__item_type_link');
 
 
+//template
+const elementsTemplate = document.querySelector('.elements__template').content;
+const elements = document.querySelector('.elements');
+
+//добавление мест из архива
+function renderCards() {
+  initialCards.forEach(creatCard);
+};
+
+//добавление мест в низ
+function creatCard(item) {
+  const newElement = elementsTemplate.cloneNode(true);
+  newElement.querySelector('.element__place').textContent = item.name;
+  newElement.querySelector('.element__image').src = item.link;
+  newElement.querySelector('.element__image').alt = item.name;
+  elements.append(newElement);
+};
+renderCards()
+
+//добавление мест в начало
+function creatUserCard(item) {
+  const newElement = elementsTemplate.cloneNode(true);
+  newElement.querySelector('.element__place').textContent = item.name;
+  newElement.querySelector('.element__image').src = item.link;
+  newElement.querySelector('.element__image').alt = item.name;
+  elements.prepend(newElement);
+};
 
 //Открыть popup
 function openPopup(el) {
@@ -88,11 +102,23 @@ function openPopup(el) {
 function closePopup(el) {
   //event.target.closest('.popup_opened').remove();
   el.classList.remove('popup_opened');
-
 };
 
+//submit добавить место
+function addFormSubmitHandler(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  const userPlace = {
+    name: inputPlace.value,
+    link: inputLink.value
+  };
+  console.log(userPlace);
+  closePopup(popupAddCard);
+  creatUserCard(userPlace);
+};
+
+
 //submit редактирования данных
-function formSubmitHandler(evt) {
+function editFormSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
@@ -109,9 +135,15 @@ function formSubmitHandler(evt) {
 // Слушатели событий
 editButton.addEventListener('click', () => openPopup(popupEditProfile));
 addButton.addEventListener('click', () => openPopup(popupAddCard));
-closeButtons.forEach(button => {
-  const popup = button.closest('.popup');
+
+closeButtons.forEach((closeButton) => {
+  const popup = closeButton.closest('.popup');
+  console.log(closeButton)
+    // console.log(i)
+    // console.log(j)
   console.log(popup);
-  button.addEventListener('click', () => closePopup(popup))
+  closeButton.addEventListener('click', () => closePopup(popup))
 });
-formElement.addEventListener('submit', formSubmitHandler);
+
+editFormElement.addEventListener('submit', editFormSubmitHandler);
+addFormElement.addEventListener('submit', addFormSubmitHandler);
