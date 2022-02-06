@@ -102,9 +102,9 @@ function openPopup(el) {
 };
 
 //Закрыть popup
-function closePopup(el) {
+function closePopup() {
   //event.target.closest('.popup_opened').remove();
-  el.classList.remove('popup_opened');
+  document.querySelector('.popup_opened').classList.remove('popup_opened');
 };
 
 //submit добавить место
@@ -115,7 +115,7 @@ function addFormSubmitHandler(evt) {
     link: inputLink.value
   };
   console.log(userPlace);
-  closePopup(popupAddCard);
+  closePopup();
   creatUserCard(userPlace);
 };
 
@@ -125,23 +125,30 @@ function editFormSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup(popupEditProfile);
+  closePopup();
 }
 
-// Like
-//const likeButton = document.querySelector('.element__heart');
 //Функция like
 function heartActive(event) {
   //debugger;
   event.target.classList.toggle('element__heart_active');
 };
-//likeButton.addEventListener('click', heartActive);
+
+//Функция удаление места
+function deletePlace(event) {
+  debugger;
+  event.target.closest('.elements__item').remove();
+}
 
 //Функция. добавляющая обработчик
 function addListeners(el) {
   el.querySelector('.element__heart').addEventListener('click', heartActive);
-  //el.querySelector('.duplicate').addEventListener('click', handleDuplicate)
-  //el.querySelector('.edit').addEventListener('click', handleEdit)
+  el.querySelector('.elements__item-delete').addEventListener('click', deletePlace);
+  el.querySelector('.element__image').addEventListener('click', imageView);
+}
+
+function imageView() {
+  document.querySelector('.popup_view_image').classList.add('popup_opened');
 }
 
 // Слушатели событий
@@ -149,22 +156,10 @@ editButton.addEventListener('click', () => openPopup(popupEditProfile));
 addButton.addEventListener('click', () => openPopup(popupAddCard));
 
 closeButtons.forEach((closeButton) => {
-  const popup = closeButton.closest('.popup');
-  console.log(closeButton)
-    // console.log(i)
-    // console.log(j)
-  console.log(popup);
-  closeButton.addEventListener('click', () => closePopup(popup))
-});
-
-closeButtons.forEach((closeButton) => {
-  const popup = closeButton.closest('.popup');
-  console.log(closeButton)
-    // console.log(i)
-    // console.log(j)
-  console.log(popup);
-  closeButton.addEventListener('click', () => closePopup(popup))
+  closeButton.addEventListener('click', closePopup);
 });
 
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 addFormElement.addEventListener('submit', addFormSubmitHandler);
+
+//closeButtons.addEventListener('click', closePopup(event))
