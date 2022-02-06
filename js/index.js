@@ -77,6 +77,8 @@ function creatCard(item) {
   newElement.querySelector('.element__place').textContent = item.name;
   newElement.querySelector('.element__image').src = item.link;
   newElement.querySelector('.element__image').alt = item.name;
+  addListeners(newElement);
+  //newElement.querySelector('.element__heart').addEventListener('click', heartActive)
   elements.append(newElement);
 };
 renderCards()
@@ -87,6 +89,7 @@ function creatUserCard(item) {
   newElement.querySelector('.element__place').textContent = item.name;
   newElement.querySelector('.element__image').src = item.link;
   newElement.querySelector('.element__image').alt = item.name;
+  addListeners(newElement);
   elements.prepend(newElement);
 };
 
@@ -126,15 +129,33 @@ function editFormSubmitHandler(evt) {
 }
 
 // Like
-// let heartButton = document.querySelector('.element__heart');
-// function heartActive() {
-//   heartButton.classList.toggle('element__heart_active');
-// };
-// heartButton.addEventListener('click', heartActive);
+//const likeButton = document.querySelector('.element__heart');
+//Функция like
+function heartActive(event) {
+  //debugger;
+  event.target.classList.toggle('element__heart_active');
+};
+//likeButton.addEventListener('click', heartActive);
+
+//Функция. добавляющая обработчик
+function addListeners(el) {
+  el.querySelector('.element__heart').addEventListener('click', heartActive);
+  //el.querySelector('.duplicate').addEventListener('click', handleDuplicate)
+  //el.querySelector('.edit').addEventListener('click', handleEdit)
+}
 
 // Слушатели событий
 editButton.addEventListener('click', () => openPopup(popupEditProfile));
 addButton.addEventListener('click', () => openPopup(popupAddCard));
+
+closeButtons.forEach((closeButton) => {
+  const popup = closeButton.closest('.popup');
+  console.log(closeButton)
+    // console.log(i)
+    // console.log(j)
+  console.log(popup);
+  closeButton.addEventListener('click', () => closePopup(popup))
+});
 
 closeButtons.forEach((closeButton) => {
   const popup = closeButton.closest('.popup');
