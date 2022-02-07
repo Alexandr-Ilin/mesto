@@ -23,6 +23,7 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
 //кнопки
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button')
@@ -44,9 +45,19 @@ const inputLink = document.querySelector('.form__item_type_link');
 const elementsTemplate = document.querySelector('.elements__template').content;
 const elements = document.querySelector('.elements');
 
+//определения popup
+const profilePopup = document.querySelector('.popup_type_edit-profile');
+const addCardPopup = document.querySelector('.popup_type_add-card');
+const viewCardPopup = document.querySelector('.popup_type_view-image');
+
+//просмотр фото
+const viewPlaceName = document.querySelector('.element-view__place');
+const viewImage = document.querySelector('.element-view__image');
+
+//function
 //добавление мест из архива
 function renderCards() {
-  initialCards.forEach(appendAddCard);
+  initialCards.forEach(appendCard);
 };
 
 renderCards()
@@ -55,19 +66,21 @@ renderCards()
 function creatCard(item) {
   const newElement = elementsTemplate.cloneNode(true);
   newElement.querySelector('.element__place').textContent = item.name;
+  const placeImage = newElement.querySelector('.element__image');
+  placeImage.alt = item.name;
+  placeImage.src = item.link;
   newElement.querySelector('.element__image').src = item.link;
-  newElement.querySelector('.element__image').alt = item.name;
   addListeners(newElement);
   return newElement;
 };
 
 //добавление карточки места вниз списка
-function appendAddCard(item) {
+function appendCard(item) {
   elements.append(creatCard(item));
 }
 
 //добавление карт мест в начало и обработчиков
-function prependAddCard(userPlace) {
+function prependCard(userPlace) {
   elements.prepend(creatCard(userPlace));
 };
 
@@ -75,22 +88,24 @@ function prependAddCard(userPlace) {
 function openEditProfilePopup() {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  document.querySelector('.popup_type_edit-profile').classList.add('popup_opened');
+  profilePopup.classList.add('popup_opened')
 };
 
 //Открыть popup добавления карточки места пользователем
 function openAddCardPopup() {
-  document.querySelector('.form__item_type_place').value = '';
-  document.querySelector('.form__item_type_link').value = '';
-  document.querySelector('.popup_type_add-card').classList.add('popup_opened');
+  inputPlace.value = '';
+  inputLink.value = '';
+  addCardPopup.classList.add('popup_opened');
 };
 
 //Открыть popup просмотра фото места
 function openViewPlacePopup(event) {
   console.log(event.target);
-  document.querySelector('.element-view__image').src = event.target.src;
-  document.querySelector('.element-view__place').textContent = event.target.alt;
-  document.querySelector('.popup_type_view-image').classList.add('popup_opened');
+
+  viewImage.src = event.target.src;
+  viewImage.alt = event.target.alt;
+  viewPlaceName.textContent = event.target.alt;
+  viewCardPopup.classList.add('popup_opened');
 }
 
 //Закрыть popup
@@ -99,18 +114,18 @@ function closePopup() {
 };
 
 //submit добавить место
-function addFormSubmitHandler(evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   const userPlace = {
     name: inputPlace.value,
     link: inputLink.value
   };
   closePopup();
-  prependAddCard(userPlace);
+  prependCard(userPlace);
 };
 
 //submit редактирования данных
-function editFormSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
@@ -118,7 +133,7 @@ function editFormSubmitHandler(evt) {
 }
 
 //Функция like
-function heartActive(event) {
+function toggleHeart(event) {
   event.target.classList.toggle('element__heart_active');
 };
 
@@ -130,7 +145,7 @@ function deletePlace(event) {
 // Слушатели событий
 //Функция. добавляющая обработчики в создаваемые карточки мест
 function addListeners(el) {
-  el.querySelector('.element__heart').addEventListener('click', heartActive);
+  el.querySelector('.element__heart').addEventListener('click', toggleHeart);
   el.querySelector('.elements__item-delete').addEventListener('click', deletePlace);
   el.querySelector('.element__image').addEventListener('click', openViewPlacePopup);
 }
@@ -141,5 +156,5 @@ closeButtons.forEach((closeButton) => {
   closeButton.addEventListener('click', closePopup);
 });
 
-editFormElement.addEventListener('submit', editFormSubmitHandler);
-addFormElement.addEventListener('submit', addFormSubmitHandler);
+editFormElement.addEventListener('submit', handleProfileFormSubmit);
+addFormElement.addEventListener('submit', handleAddFormSubmit);
