@@ -8,7 +8,7 @@
   <title>"Место"</title>
 </head>
 
-<body>
+<body class="body">
   <div class="page">
     <header class="header">
       <img src="images/logo1.svg" alt="Логотип проекта Место" class="header__logo">
@@ -29,10 +29,8 @@
 
       <section class="elements-section">
         <ul class="elements">
-
         </ul>
       </section>
-
 
     </main>
 
@@ -44,20 +42,20 @@
       <li class="elements__item">
         <button class="elements__item-delete" type="button" aria-label="Удалить это фото"></button>
         <figure class="element">
-          <img src="images/karachaevsk.jpg" alt="Сентинский храм" class="element__image">
+          <img src="" alt="" class="element__image">
           <figcaption class="element__caption">
-            <h2 class="element__place">Карачаевск</h2>
+            <h2 class="element__place"></h2>
             <button class="element__heart" type="button" aria-label="Лайк"></button>
           </figcaption>
         </figure>
       </li>
     </template>
 
-    <div class="popup popup_edit_profile">
+    <div class="popup popup_type_edit-profile">
       <div class="popup__form-container">
         <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
         <h2 class="popup__form-header">Редактировать профиль</h2>
-        <form action="#" class="form form_edit_profile" name="edit-profile">
+        <form action="#" class="form form_type_edit-profile" name="edit-profile">
           <input required minlength="2" type="text" class="form__item form__item_type_name" name="input-name" placeholder="Имя">
           <input required minlength="2" type="text" class="form__item form__item_type_about" name="input-about" placeholder="О себе">
           <button type="submit" class="form__submit-button">Сохранить</button>
@@ -65,92 +63,32 @@
       </div>
     </div>
 
-    <div class="popup popup_add_card">
+    <div class="popup popup_type_add-card">
       <div class="popup__form-container">
         <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
         <h2 class="popup__form-header">Новое место</h2>
         <form action="#" class="form form_edit_place" name="edit-profile">
-          <input required minlength="2" type="text" class="form__item form__item_type_place" name="input-place" placeholder="Название">
+          <input required minlength="2" maxlength="50" type="text" class="form__item form__item_type_place" name="input-place" placeholder="Название">
           <input required minlength="2" type="url" class="form__item form__item_type_link" name="input-link" placeholder="Ссылка на картинку">
           <button type="submit" class="form__submit-button">Создать</button>
         </form>
       </div>
     </div>
 
-    <div class="popup popup_view_image">
+    <div class="popup popup_type_view-image">
       <div class="popup__view-container">
         <button type="button" class="popup__close" aria-label="Закрыть окно"></button>
         <figure class="element-view">
           <img src="images/karachaevsk.jpg" alt="Сентинский храм" class="element-view__image">
           <figcaption class="element-view__caption">
-            <h2 class="element-view__place">Карачаевск</h2>
+            <h2 class="element-view__place"></h2>
           </figcaption>
         </figure>
       </div>
     </div>
-
 
   </div>
   <script src="js/index.js"></script>
 </body>
 
 </html>
-<!-- <li>
-            <figure class="element">
-              <img src="images/karachaevsk.jpg" alt="Сентинский храм" class="element__image">
-              <figcaption class="element__caption">
-                <h2 class="element__place">Карачаевск</h2>
-                <button class="element__heart" type="button" aria-label="Лайк"></button>
-              </figcaption>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="element">
-              <img src="images/elbrus.jpg" alt="Эльбрус" class="element__image">
-              <figcaption class="element__caption">
-                <h2 class="element__place">Гора Эльбрус</h2>
-                <button class="element__heart" type="button" aria-label="Лайк"></button>
-              </figcaption>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="element">
-              <img src="images/dombay1.jpg" alt="Домбай" class="element__image">
-              <figcaption class="element__caption">
-                <h2 class="element__place">Домбай</h2>
-                <button class="element__heart" type="button" aria-label="Лайк"></button>
-              </figcaption>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="element">
-              <img src="images/elbrus.jpg" alt="Эльбрус" class="element__image">
-              <figcaption class="element__caption">
-                <h2 class="element__place">Гора Эльбрус</h2>
-                <button class="element__heart" type="button" aria-label="Лайк"></button>
-              </figcaption>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="element">
-              <img src="images/dombay1.jpg" alt="Домбай" class="element__image">
-              <figcaption class="element__caption">
-                <h2 class="element__place">Домбай</h2>
-                <button class="element__heart" type="button" aria-label="Лайк"></button>
-              </figcaption>
-            </figure>
-          </li>
-
-          <li>
-            <figure class="element">
-              <img src="images/karachaevsk.jpg" alt="Сентинский храм " class="element__image">
-              <figcaption class="element__caption">
-                <h2 class="element__place">Карачаево-Черкесия</h2>
-                <button class="element__heart" type="button" aria-label="Лайк"></button>
-              </figcaption>
-            </figure>
-          </li> -->

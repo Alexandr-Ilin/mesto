@@ -1,9 +1,4 @@
 .page {
-  background: #000;
-  font-family: 'inter', 'arial', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
