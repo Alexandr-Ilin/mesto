@@ -88,14 +88,14 @@ function prependCard(userPlace) {
 function openEditProfilePopup() {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  profilePopup.classList.add('popup_opened')
+  openPopup(profilePopup);
 };
 
 //Открыть popup добавления карточки места пользователем
 function openAddCardPopup() {
   inputPlace.value = '';
   inputLink.value = '';
-  addCardPopup.classList.add('popup_opened');
+  openPopup(addCardPopup);
 };
 
 //Открыть popup просмотра фото места
@@ -105,8 +105,13 @@ function openViewPlacePopup(event) {
   viewImage.src = event.target.src;
   viewImage.alt = event.target.alt;
   viewPlaceName.textContent = event.target.alt;
-  viewCardPopup.classList.add('popup_opened');
-}
+  openPopup(viewCardPopup);
+};
+
+//функция открыть popup
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+};
 
 //Закрыть popup
 function closePopup() {
