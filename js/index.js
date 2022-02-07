@@ -114,8 +114,8 @@ function openPopup(popup) {
 };
 
 //Закрыть popup
-function closePopup() {
-  document.querySelector('.popup_opened').classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 };
 
 //submit добавить место
@@ -125,7 +125,7 @@ function handleAddFormSubmit(evt) {
     name: inputPlace.value,
     link: inputLink.value
   };
-  closePopup();
+  closePopup(addCardPopup);
   prependCard(userPlace);
 };
 
@@ -134,7 +134,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup();
+  closePopup(profilePopup);
 }
 
 //Функция like
@@ -158,7 +158,10 @@ editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
 
 closeButtons.forEach((closeButton) => {
-  closeButton.addEventListener('click', closePopup);
+  const popup = closeButton.closest('.popup')
+  closeButton.addEventListener('click', () => {
+    closePopup(popup)
+  });
 });
 
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
