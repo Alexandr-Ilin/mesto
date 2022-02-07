@@ -54,7 +54,7 @@ const viewCardPopup = document.querySelector('.popup_type_view-image');
 const viewPlaceName = document.querySelector('.element-view__place');
 const viewImage = document.querySelector('.element-view__image');
 
-//function
+//functions
 //добавление мест из архива
 function renderCards() {
   initialCards.forEach(appendCard);
@@ -100,8 +100,6 @@ function openAddCardPopup() {
 
 //Открыть popup просмотра фото места
 function openViewPlacePopup(event) {
-  console.log(event.target);
-
   viewImage.src = event.target.src;
   viewImage.alt = event.target.alt;
   viewPlaceName.textContent = event.target.alt;
@@ -135,7 +133,7 @@ function handleProfileFormSubmit(evt) {
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
   closePopup(profilePopup);
-}
+};
 
 //Функция like
 function toggleHeart(event) {
@@ -145,7 +143,7 @@ function toggleHeart(event) {
 //Функция удаление места
 function deletePlace(event) {
   event.target.closest('.elements__item').remove();
-}
+};
 
 // Слушатели событий
 //Функция. добавляющая обработчики в создаваемые карточки мест
@@ -153,7 +151,8 @@ function addListeners(el) {
   el.querySelector('.element__heart').addEventListener('click', toggleHeart);
   el.querySelector('.elements__item-delete').addEventListener('click', deletePlace);
   el.querySelector('.element__image').addEventListener('click', openViewPlacePopup);
-}
+};
+
 editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
 
