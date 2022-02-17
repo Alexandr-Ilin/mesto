@@ -1,0 +1,8 @@
+.form__error-massage {
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 15px;
+  /*Line height: 100%;*/
+  vertical-align: top;
+  color: #FF0000;
+}
