@@ -23,7 +23,12 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+// //формы
+// const forms = document.querySelectorAll('.form')
+// console.log(forms);
+// forms.forEach(form) => {
+//   form.addEventListener
+// }
 //кнопки
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button')
@@ -96,7 +101,18 @@ function openAddCardPopup() {
   inputPlace.value = '';
   inputLink.value = '';
   openPopup(addCardPopup);
+  disableSubmitButton(addCardPopup);
 };
+
+//Деактивировать субмит при открытии формы
+
+function disableSubmitButton(element) {
+  console.log(element)
+  const submitButton = element.querySelector('.form__submit-button');
+  console.log(submitButton);
+  submitButton.setAttribute('disabled', '');
+  submitButton.classList.add('form__submit-button_disabled');
+}
 
 //Открыть popup просмотра фото места
 function openViewPlacePopup(event) {
@@ -104,16 +120,23 @@ function openViewPlacePopup(event) {
   viewImage.alt = event.target.alt;
   viewPlaceName.textContent = event.target.alt;
   openPopup(viewCardPopup);
+
 };
+
 
 //функция открыть popup
 function openPopup(popup) {
+  //console.log(popup)
   popup.classList.add('popup_opened');
+  handlerOverlayClick(popup)
+  document.addEventListener('keydown', handlerEscButton);
 };
 
 //Закрыть popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handlerEscButton)
+
 };
 
 //submit добавить место
@@ -125,6 +148,8 @@ function handleAddFormSubmit(evt) {
   };
   closePopup(addCardPopup);
   prependCard(userPlace);
+
+
 };
 
 //submit редактирования данных
@@ -165,3 +190,5 @@ closeButtons.forEach((closeButton) => {
 
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
 addFormElement.addEventListener('submit', handleAddFormSubmit);
+
+//
