@@ -96,7 +96,7 @@ function openAddCardPopup() {
   inputPlace.value = '';
   inputLink.value = '';
   openPopup(addCardPopup);
-  //disableSubmitButton(addCardPopup);
+  disableSubmitButton(addCardPopup);
 };
 
 //Деактивировать submit при открытии формы
@@ -194,3 +194,4 @@ closeButtons.forEach((closeButton) => {
 
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
 addFormElement.addEventListener('submit', handleAddFormSubmit);
+
