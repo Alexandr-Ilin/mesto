@@ -1,8 +1,16 @@
 .form__error-message {
-  font-style: Regular;
+  font-weight: 400;
+  font-style: normal;
   font-size: 12px;
   line-height: 15px;
   /*Line height: 100%;*/
   vertical-align: top;
   color: #FF0000;
+  margin-bottom: 13px;
+  display: block;
+  min-height: 20px;
+}
+
+.form__error-message:last-of-type {
+  margin-bottom: 31px;
 }

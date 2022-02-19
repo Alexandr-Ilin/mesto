@@ -7,7 +7,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 0;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   border: none;
   padding-bottom: 9px;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
@@ -22,16 +22,6 @@
   outline: none;
 }
 
-.form__item:last-of-type {
-  margin-bottom: 48px;
-}
-
 .form__item::placeholder {
   color: #000;
-}
-
-@media screen and (max-width: 940px) {
-  .form__item:last-of-type {
-    margin-bottom: 45px;
-  }
 }

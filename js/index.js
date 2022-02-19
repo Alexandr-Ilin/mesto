@@ -21,14 +21,9 @@ const initialCards = [{
   {
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
+  },
 ];
-// //формы
-// const forms = document.querySelectorAll('.form')
-// console.log(forms);
-// forms.forEach(form) => {
-//   form.addEventListener
-// }
+
 //кнопки
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button')
@@ -101,15 +96,12 @@ function openAddCardPopup() {
   inputPlace.value = '';
   inputLink.value = '';
   openPopup(addCardPopup);
-  disableSubmitButton(addCardPopup);
+  //disableSubmitButton(addCardPopup);
 };
 
-//Деактивировать субмит при открытии формы
-
+//Деактивировать submit при открытии формы
 function disableSubmitButton(element) {
-  console.log(element)
   const submitButton = element.querySelector('.form__submit-button');
-  console.log(submitButton);
   submitButton.setAttribute('disabled', '');
   submitButton.classList.add('form__submit-button_disabled');
 }
@@ -120,23 +112,37 @@ function openViewPlacePopup(event) {
   viewImage.alt = event.target.alt;
   viewPlaceName.textContent = event.target.alt;
   openPopup(viewCardPopup);
-
 };
-
 
 //функция открыть popup
 function openPopup(popup) {
   //console.log(popup)
   popup.classList.add('popup_opened');
-  handlerOverlayClick(popup)
+  handlerOverlayClick(popup);
   document.addEventListener('keydown', handlerEscButton);
 };
 
 //Закрыть popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handlerEscButton)
+  document.removeEventListener('keydown', handlerEscButton);
+};
 
+//закрытие popup по клику overlay
+const handlerOverlayClick = (popup) => {
+  popup.addEventListener('click', (event) => {
+    if (event.target === event.currentTarget) {
+      closePopup(popup);
+    };
+  });
+};
+
+//закрытие popup по нажатию esc
+const handlerEscButton = (event) => {
+  if (event.keyCode === 27) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  };
 };
 
 //submit добавить место
@@ -144,12 +150,10 @@ function handleAddFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   const userPlace = {
     name: inputPlace.value,
-    link: inputLink.value
+    link: inputLink.value,
   };
   closePopup(addCardPopup);
   prependCard(userPlace);
-
-
 };
 
 //submit редактирования данных
@@ -182,13 +186,11 @@ editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
 
 closeButtons.forEach((closeButton) => {
-  const popup = closeButton.closest('.popup')
+  const popup = closeButton.closest('.popup');
   closeButton.addEventListener('click', () => {
-    closePopup(popup)
+    closePopup(popup);
   });
 });
 
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
 addFormElement.addEventListener('submit', handleAddFormSubmit);
-
-//
