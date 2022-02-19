@@ -57,9 +57,9 @@
         <h2 class="popup__form-header">Редактировать профиль</h2>
         <form action="#" class="form form_type_edit-profile" name="edit-profile">
           <input required minlength="2" maxlength="40" type="text" class="form__item form__item_type_name" name="input-name" placeholder="Имя">
-          <span class="form__error-message"> </span>
+          <span class="form__error-message form__error-message_type_input-name"> </span>
           <input required minlength="2" maxlength="200" type="text" class="form__item form__item_type_about" name="input-about" placeholder="О себе">
-          <span class="form__error-message"></span>
+          <span class="form__error-message form__error-message_type_input-about"></span>
           <button type="submit" class="form__submit-button">Сохранить</button>
         </form>
       </div>
@@ -71,9 +71,9 @@
         <h2 class="popup__form-header">Новое место</h2>
         <form action="#" class="form form_edit_place" name="edit-place">
           <input required minlength="2" maxlength="30" type="text" class="form__item form__item_type_place" name="input-place" placeholder="Название">
-          <span class="form__error-message"></span>
+          <span class="form__error-message form__error-message_type_input-place"></span>
           <input required type="url" class="form__item form__item_type_link" name="input-link" placeholder="Ссылка на картинку">
-          <span class="form__error-message"></span>
+          <span class="form__error-message form__error-message_type_input-link"></span>
           <button type="submit" class="form__submit-button">Создать</button>
         </form>
       </div>
@@ -93,7 +93,7 @@
 
   </div>
   <script src="js/index.js"></script>
-  <script src="js/validate.js"></script>
+  <script src="js/val.js"></script>
 </body>
 
 </html>

@@ -54,6 +54,9 @@ const viewCardPopup = document.querySelector('.popup_type_view-image');
 const viewPlaceName = document.querySelector('.element-view__place');
 const viewImage = document.querySelector('.element-view__image');
 
+//ошибки
+
+
 //functions
 //добавление мест из архива
 function renderCards() {
@@ -88,6 +91,8 @@ function prependCard(userPlace) {
 function openEditProfilePopup() {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
+  resetError(profilePopup);
+  disableSubmitButton(profilePopup);
   openPopup(profilePopup);
 };
 
@@ -95,8 +100,11 @@ function openEditProfilePopup() {
 function openAddCardPopup() {
   inputPlace.value = '';
   inputLink.value = '';
-  openPopup(addCardPopup);
+  const form = addCardPopup.querySelector('.form');
+  resetError(addCardPopup);
   disableSubmitButton(addCardPopup);
+  openPopup(addCardPopup);
+
 };
 
 //Деактивировать submit при открытии формы
@@ -104,6 +112,19 @@ function disableSubmitButton(element) {
   const submitButton = element.querySelector('.form__submit-button');
   submitButton.setAttribute('disabled', '');
   submitButton.classList.add('form__submit-button_disabled');
+}
+
+//функция сброса ошибок при открытиии popup
+function resetError(element) {
+  const errorMessages = element.querySelectorAll('.form__error-message');
+  const inputItems = element.querySelectorAll('.form__item');
+  errorMessages.forEach(errorMessage => {
+    errorMessage.textContent = '';
+    errorMessage.classList.remove('form__error-message_visible');
+  })
+  inputItems.forEach(inputItem => {
+    inputItem.classList.remove('form__item_error')
+  })
 }
 
 //Открыть popup просмотра фото места
@@ -194,4 +215,3 @@ closeButtons.forEach((closeButton) => {
 
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
 addFormElement.addEventListener('submit', handleAddFormSubmit);
-
