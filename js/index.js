@@ -117,11 +117,11 @@ function disableSubmitButton(element) {
 //функция сброса ошибок при открытиии popup
 function resetError(element) {
   const errorMessages = element.querySelectorAll('.form__error-message');
-  const inputItems = element.querySelectorAll('.form__item');
   errorMessages.forEach(errorMessage => {
     errorMessage.textContent = '';
     errorMessage.classList.remove('form__error-message_visible');
   })
+  const inputItems = element.querySelectorAll('.form__item');
   inputItems.forEach(inputItem => {
     inputItem.classList.remove('form__item_error')
   })
@@ -137,32 +137,28 @@ function openViewPlacePopup(event) {
 
 //функция открыть popup
 function openPopup(popup) {
-  //console.log(popup)
   popup.classList.add('popup_opened');
-  handlerOverlayClick(popup);
   document.addEventListener('keydown', handlerEscButton);
 };
 
 //Закрыть popup
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+function closePopup() {
+  document.querySelector('.popup_opened').classList.remove('popup_opened');
   document.removeEventListener('keydown', handlerEscButton);
 };
 
 //закрытие popup по клику overlay
-const handlerOverlayClick = (popup) => {
-  popup.addEventListener('click', (event) => {
-    if (event.target === event.currentTarget) {
-      closePopup(popup);
-    };
-  });
+const handlerOverlayClick = (event) => {
+  if (event.target === event.currentTarget || event.target.classList.contains('popup__close')) {
+    closePopup();
+  };
 };
+
 
 //закрытие popup по нажатию esc
 const handlerEscButton = (event) => {
   if (event.keyCode === 27) {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
+    closePopup();
   };
 };
 
@@ -182,7 +178,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup(profilePopup);
+  closePopup();
 };
 
 //Функция like
@@ -202,16 +198,13 @@ function addListeners(el) {
   el.querySelector('.elements__item-delete').addEventListener('click', deletePlace);
   el.querySelector('.element__image').addEventListener('click', openViewPlacePopup);
 };
-
+//кнопки открытия popup
 editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
-
-closeButtons.forEach((closeButton) => {
-  const popup = closeButton.closest('.popup');
-  closeButton.addEventListener('click', () => {
-    closePopup(popup);
-  });
-});
-
+//popup
+profilePopup.addEventListener('click', handlerOverlayClick);
+addCardPopup.addEventListener('click', handlerOverlayClick);
+viewCardPopup.addEventListener('click', handlerOverlayClick);
+//submit
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
 addFormElement.addEventListener('submit', handleAddFormSubmit);
