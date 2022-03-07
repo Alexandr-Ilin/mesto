@@ -1,3 +1,5 @@
+import { Card } from "./card.js";
+
 const initialCards = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -48,34 +50,41 @@ const elements = document.querySelector('.elements');
 //определения popup
 const profilePopup = document.querySelector('.popup_type_edit-profile');
 const addCardPopup = document.querySelector('.popup_type_add-card');
-const viewCardPopup = document.querySelector('.popup_type_view-image');
+export const viewCardPopup = document.querySelector('.popup_type_view-image');
 
 //просмотр фото
 const viewPlaceName = document.querySelector('.element-view__place');
 const viewImage = document.querySelector('.element-view__image');
 
-//ошибки
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item.name, item.link);
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
 
+  // Добавляем в DOM
+  document.querySelector('.elements').append(cardElement);
+});
 
 //functions
 //добавление мест из архива
-function renderCards() {
-  initialCards.forEach(appendCard);
-};
+// function renderCards() {
+//   initialCards.forEach(appendCard);
+// };
 
-renderCards()
+// renderCards()
 
 //создание карточки места и обработчиков событий
-function creatCard(item) {
-  const newElement = elementsTemplate.cloneNode(true);
-  newElement.querySelector('.element__place').textContent = item.name;
-  const placeImage = newElement.querySelector('.element__image');
-  placeImage.alt = item.name;
-  placeImage.src = item.link;
-  newElement.querySelector('.element__image').src = item.link;
-  addListeners(newElement);
-  return newElement;
-};
+// function creatCard(item) {
+//   const newElement = elementsTemplate.cloneNode(true);
+//   newElement.querySelector('.element__place').textContent = item.name;
+//   const placeImage = newElement.querySelector('.element__image');
+//   placeImage.alt = item.name;
+//   placeImage.src = item.link;
+//   newElement.querySelector('.element__image').src = item.link;
+//   addListeners(newElement);
+//   return newElement;
+// };
 
 //добавление карточки места вниз списка
 function appendCard(item) {
@@ -127,16 +136,8 @@ function resetError(element) {
   })
 }
 
-//Открыть popup просмотра фото места
-function openViewPlacePopup(event) {
-  viewImage.src = event.target.src;
-  viewImage.alt = event.target.alt;
-  viewPlaceName.textContent = event.target.alt;
-  openPopup(viewCardPopup);
-};
-
 //функция открыть popup
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handlerEscButton);
 };
@@ -181,23 +182,6 @@ function handleProfileFormSubmit(evt) {
   closePopup();
 };
 
-//Функция like
-function toggleHeart(event) {
-  event.target.classList.toggle('element__heart_active');
-};
-
-//Функция удаление места
-function deletePlace(event) {
-  event.target.closest('.elements__item').remove();
-};
-
-// Слушатели событий
-//Функция. добавляющая обработчики в создаваемые карточки мест
-function addListeners(el) {
-  el.querySelector('.element__heart').addEventListener('click', toggleHeart);
-  el.querySelector('.elements__item-delete').addEventListener('click', deletePlace);
-  el.querySelector('.element__image').addEventListener('click', openViewPlacePopup);
-};
 //кнопки открытия popup
 editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
