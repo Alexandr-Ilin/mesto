@@ -1,30 +1,32 @@
-import { openPopup, viewCardPopup } from "./index.js";
+import { viewPlacePopup, viewPlaceName, viewImage } from "./constants.js";
+import { openPopup } from "./index.js";
+
+
+//темплейт элемент
+//document.querySelector('.elements__template')
 
 export class Card {
-  constructor(name, link) {
-    this._name = name;
-    this._link = link;
+  constructor(data, templateSelector) {
+    this._templateSelector = templateSelector;
+    this._name = data.name;
+    this._link = data.link;
   }
 
   _getTemplate() {
-    const cardElement = document
-      .querySelector('.elements__template')
+    this._cardElement = document.querySelector(this._templateSelector)
       .content
       .querySelector('.elements__item')
       .cloneNode(true);
-    //console.log(cardElement)
-    return cardElement;
+    console.log('cardElement', this._cardElement)
+    return this._cardElement;
   }
 
-  generateCard() {
-    this._element = this._getTemplate();
-    this._addListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__place').textContent = this._name;
-    this._element.querySelector('.element__image').alt = this._name;
+  _deletePlace() {
+    this._element.closest('.elements__item').remove();
+  }
 
-
-    return this._element;
+  _toogleHeart() {
+    this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
   }
 
   _addListeners() {
@@ -33,21 +35,25 @@ export class Card {
     this._element.querySelector('.element__image').addEventListener('click', () => { this._openViewPlacePopup() });
   };
 
-  _toogleHeart() {
-    this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
+  generateCard() {
+    this._element = this._getTemplate();
+    console.log(this)
+    this._addListeners();
+    const _elementImage = this._element.querySelector('.element__image')
+    _elementImage.src = this._link;
+    _elementImage.alt = this._name;
+    this._element.querySelector('.element__place').textContent = this._name;
+
+
+    return this._element;
   }
 
-  _deletePlace() {
-    this._element.closest('.elements__item').remove();
-  }
+
 
   _openViewPlacePopup() {
-    document.querySelector('.element-view__place').src = this._link;
-    document.querySelector('.element-view__place').alt = this._name;
-    document.querySelector('.element-view__image').alt = this._name;
-
-    //viewImage.alt = event.target.alt;
-    //viewPlaceName.textContent = event.target.alt;
-    openPopup(viewCardPopup);
+    viewPlaceName.src = this._link;
+    viewPlaceName.textContent = this._name;
+    viewImage.alt = this._name;
+    openPopup(viewPlacePopup);
   }
 }
