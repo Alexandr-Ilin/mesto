@@ -36,9 +36,7 @@ function appendCard(cardElement) {
 }
 
 //добавление карт мест в начало и обработчиков
-function prependCard(item) {
-  const card = new Card(item, '.elements__template')
-  const cardElement = card.generateCard();
+function prependCard(cardElement) {
   elements.prepend(cardElement);
 };
 
@@ -104,7 +102,7 @@ const handlerOverlayClick = (event) => {
 
 //закрытие popup по нажатию esc
 const handlerEscButton = (event) => {
-  if (event.keyCode === 27) {
+  if (event.key === 'Escape') {
     closePopup();
   };
 };
