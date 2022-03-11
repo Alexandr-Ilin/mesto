@@ -1,5 +1,7 @@
 import { Card } from "./card.js";
 
+import { FormValidator } from "./FormValidator.js"
+
 import {
   initialCards,
   elements,
@@ -16,12 +18,18 @@ import {
   jobInput,
   nameProfile,
   jobProfile,
+  validationConfig,
 } from "./constants.js"
+
+const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
+const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
+
+editFormElementValidator.enableValidation()
+addFormElementValidator.enableValidation()
 
 initialCards.forEach((item) => {
   appendCard(renderNewCard(item));
 });
-
 
 //создание новой карточки
 function renderNewCard(item) {
@@ -44,8 +52,7 @@ function prependCard(cardElement) {
 function openEditProfilePopup() {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
-  //resetError(profilePopup);
-  //disableSubmitButton(profilePopup);
+  editFormElementValidator.validationOpenPopup()
   openPopup(profilePopup);
 };
 
@@ -53,32 +60,9 @@ function openEditProfilePopup() {
 function openAddCardPopup() {
   inputPlace.value = '';
   inputLink.value = '';
-  //const form = addCardPopup.querySelector('.form');
-  //resetError(addCardPopup);
-  //disableSubmitButton(addCardPopup);
+  addFormElementValidator.validationOpenPopup()
   openPopup(addCardPopup);
-
 };
-
-//Деактивировать submit при открытии формы
-function disableSubmitButton(element) {
-  const submitButton = element.querySelector('.form__submit-button');
-  submitButton.setAttribute('disabled', '');
-  submitButton.classList.add('form__submit-button_disabled');
-}
-
-//функция сброса ошибок при открытиии popup
-function resetError(element) {
-  const errorMessages = element.querySelectorAll('.form__error-message');
-  errorMessages.forEach(errorMessage => {
-    errorMessage.textContent = '';
-    errorMessage.classList.remove('form__error-message_visible');
-  })
-  const inputItems = element.querySelectorAll('.form__item');
-  inputItems.forEach(inputItem => {
-    inputItem.classList.remove('form__item_error')
-  })
-}
 
 //функция открыть popup
 export function openPopup(popup) {
@@ -98,7 +82,6 @@ const handlerOverlayClick = (event) => {
     closePopup();
   };
 };
-
 
 //закрытие popup по нажатию esc
 const handlerEscButton = (event) => {
@@ -126,6 +109,7 @@ function handleProfileFormSubmit(evt) {
   closePopup();
 };
 
+//слушатели событий
 //кнопки открытия popup
 editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
@@ -138,30 +122,3 @@ viewPlacePopup.addEventListener('click', handlerOverlayClick);
 //submit
 editFormElement.addEventListener('submit', handleProfileFormSubmit);
 addFormElement.addEventListener('submit', handleAddFormSubmit);
-
-
-//
-//просмотр фото
-//const viewPlaceName = document.querySelector('.element-view__place');
-//const viewImage = document.querySelector('.element-view__image');
-//functions
-//добавление мест из архива
-// function renderCards() {
-//   initialCards.forEach(appendCard);
-// };
-
-// renderCards()
-
-//создание карточки места и обработчиков событий
-// function creatCard(item) {
-//   const newElement = elementsTemplate.cloneNode(true);
-//   newElement.querySelector('.element__place').textContent = item.name;
-//   const placeImage = newElement.querySelector('.element__image');
-//   placeImage.alt = item.name;
-//   placeImage.src = item.link;
-//   newElement.querySelector('.element__image').src = item.link;
-//   addListeners(newElement);
-//   return newElement;
-// };
-//const closeButtons = document.querySelectorAll('.popup__close');
-//const elementsTemplate = document.querySelector('.elements__template').content;

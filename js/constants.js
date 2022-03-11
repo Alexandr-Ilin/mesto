@@ -36,7 +36,7 @@ export const nameInput = editFormElement.querySelector('.form__item_type_name');
 export const jobInput = editFormElement.querySelector('.form__item_type_about');
 
 //для добавления места
-export const addFormElement = document.querySelector('.form_edit_place')
+export const addFormElement = document.querySelector('.form_type_edit_place')
 export const inputPlace = document.querySelector('.form__item_type_place');
 export const inputLink = document.querySelector('.form__item_type_link');
 
@@ -51,3 +51,13 @@ export const elements = document.querySelector('.elements');
 export const profilePopup = document.querySelector('.popup_type_edit-profile');
 export const addCardPopup = document.querySelector('.popup_type_add-card');
 export const viewPlacePopup = document.querySelector('.popup_type_view-image');
+
+//настройка валидации
+export const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_disabled',
+  inputErrorClass: 'form__item_error',
+  errorClass: 'form__error-message_visible',
+};

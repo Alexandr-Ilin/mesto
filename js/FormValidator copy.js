@@ -12,6 +12,8 @@ export class FormValidator {
   }
 
   _showError(inputItem, errorMessage) {
+    console.log(inputItem.validationMessage)
+    debugger
     inputItem.classList.add(this._inputErrorClass);
     const message = this._form.querySelector(`.form__error-message_type_${inputItem.name}`);
     message.textContent = errorMessage;
@@ -19,6 +21,8 @@ export class FormValidator {
   }
 
   _checkInputValidity(inputItem) {
+    console.log('input', inputItem)
+
     if (inputItem.validity.valid) {
       this._hideError(inputItem);
     } else {
@@ -27,22 +31,27 @@ export class FormValidator {
   }
 
   _hasInvalidInput() {
+
     return this._inputItems.some(inputItem => {
       return !inputItem.validity.valid;
     });
   };
 
+
   _toogleButtonState() {
     if (this._hasInvalidInput()) {
+
       this._button.setAttribute('disabled', '');
       this._button.classList.add(this._settings.inactiveButtonClass);
     } else {
+
       this._button.removeAttribute('disabled')
       this._button.classList.remove(this._settings.inactiveButtonClass)
     }
   }
 
   _addInputListener() {
+
     this._inputItems = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
     this._button = this._form.querySelector(this._settings.submitButtonSelector);
     this._inputItems.forEach(inputItem => {
@@ -54,16 +63,10 @@ export class FormValidator {
   }
 
   enableValidation() {
+
     this._form.addEventListener('submit', function(event) {
       event.preventDefault();
     });
     this._addInputListener();
-  }
-
-  validationOpenPopup() {
-    this._inputItems.forEach(inputItem => {
-      this._checkInputValidity(inputItem)
-    })
-    this._toogleButtonState()
   }
 }
