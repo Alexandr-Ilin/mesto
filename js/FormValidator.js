@@ -62,7 +62,7 @@ export class FormValidator {
 
   validationOpenPopup() {
     this._inputItems.forEach(inputItem => {
-      this._checkInputValidity(inputItem)
+      this._hideError(inputItem)
     })
     this._toogleButtonState()
   }

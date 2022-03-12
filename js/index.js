@@ -1,4 +1,4 @@
-import { Card } from "./card.js";
+import { Card } from "./Сard.js";
 
 import { FormValidator } from "./FormValidator.js"
 
@@ -19,6 +19,8 @@ import {
   nameProfile,
   jobProfile,
   validationConfig,
+  viewPlaceName,
+  viewImage
 } from "./constants.js"
 
 const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
@@ -33,7 +35,7 @@ initialCards.forEach((item) => {
 
 //создание новой карточки
 function renderNewCard(item) {
-  const card = new Card(item, '.elements__template');
+  const card = new Card(item, '.elements__template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -63,6 +65,14 @@ function openAddCardPopup() {
   addFormElementValidator.validationOpenPopup()
   openPopup(addCardPopup);
 };
+
+//Открыть popup просмотра фото в классе Card
+function handleCardClick(name, link) {
+  viewPlaceName.textContent = name;
+  viewImage.alt = name;
+  viewImage.src = link;
+  openPopup(viewPlacePopup);
+}
 
 //функция открыть popup
 export function openPopup(popup) {

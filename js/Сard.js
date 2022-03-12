@@ -1,11 +1,9 @@
-import { viewPlacePopup, viewPlaceName, viewImage } from "./constants.js";
-import { openPopup } from "./index.js";
-
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._templateSelector = templateSelector;
     this._name = data.name;
     this._link = data.link;
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
@@ -27,8 +25,10 @@ export class Card {
   _addListeners() {
     this._likeButton.addEventListener('click', () => { this._toogleHeart() });
     this._element.querySelector('.elements__item-delete').addEventListener('click', () => { this._deletePlace() });
-    this._elementImage.addEventListener('click', () => { this._openViewPlacePopup() });
-  };
+    this._elementImage.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link)
+    });
+  }
 
   generateCard() {
     this._element = this._getTemplate();
@@ -39,12 +39,5 @@ export class Card {
     this._element.querySelector('.element__place').textContent = this._name;
     this._addListeners();
     return this._element;
-  }
-
-  _openViewPlacePopup() {
-    viewPlaceName.textContent = this._name;
-    viewImage.alt = this._name;
-    viewImage.src = this._link;
-    openPopup(viewPlacePopup);
   }
 }
