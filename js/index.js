@@ -1,6 +1,6 @@
-import { Card } from "./Сard.js";
+import { Card } from "../components/Сard.js";
 
-import { FormValidator } from "./FormValidator.js"
+import { FormValidator } from "../components/FormValidator.js"
 
 import {
   initialCards,
@@ -21,7 +21,7 @@ import {
   validationConfig,
   viewPlaceName,
   viewImage
-} from "./constants.js"
+} from "../utils/constants.js"
 
 const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
 const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
