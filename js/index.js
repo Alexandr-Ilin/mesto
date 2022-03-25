@@ -1,4 +1,5 @@
 import { Card } from "../components/Сard.js";
+import Section from "../components/section.js";
 
 import { FormValidator } from "../components/FormValidator.js"
 
@@ -29,9 +30,23 @@ const addFormElementValidator = new FormValidator(validationConfig, addFormEleme
 editFormElementValidator.enableValidation()
 addFormElementValidator.enableValidation()
 
-initialCards.forEach((item) => {
-  appendCard(renderNewCard(item));
-});
+// initialCards.forEach((item) => {
+//   appendCard(renderNewCard(item));
+// });
+
+//карточки по умолчанию
+const defaultCardList = new Section({
+  data: initialCards,
+  renderer: (item) => {
+    const cardElement = renderNewCard(item)
+    defaultCardList.appendCard(cardElement);
+  }
+}, elements);
+
+
+
+//отрисовка карточек по умолчанию
+defaultCardList.renderItems();
 
 //создание новой карточки
 function renderNewCard(item) {
@@ -40,10 +55,10 @@ function renderNewCard(item) {
   return cardElement;
 }
 
-//добавление карточки места вниз списка
-function appendCard(cardElement) {
-  elements.append(cardElement);
-}
+// //добавление карточки места вниз списка
+// function appendCard(cardElement) {
+//   elements.append(cardElement);
+// }
 
 //добавление карт мест в начало и обработчиков
 function prependCard(cardElement) {
@@ -103,12 +118,18 @@ const handlerEscButton = (event) => {
 //submit добавить место
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  const userPlace = {
-    name: inputPlace.value,
-    link: inputLink.value,
-  };
   closePopup(addCardPopup);
-  prependCard(renderNewCard(userPlace));
+  const userCardList = new Section({
+    data: [{
+      name: inputPlace.value,
+      link: inputLink.value,
+    }],
+    renderer: (item) => {
+      const cardElement = renderNewCard(item)
+      userCardList.prependCard(cardElement);
+    }
+  }, elements);
+  userCardList.renderItems()
 };
 
 //submit редактирования данных
