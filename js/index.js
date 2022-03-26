@@ -32,17 +32,41 @@ import PopupWithForm from "../components/PopupWithForm.js";
 const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
 const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
 
-//editFormElementValidator.enableValidation()
-//addFormElementValidator.enableValidation()
+editFormElementValidator.enableValidation()
+addFormElementValidator.enableValidation()
 
 //карточки по умолчанию
 const defaultCardList = new Section({
   data: initialCards,
   renderer: (item) => {
     const cardElement = renderNewCard(item)
-    defaultCardList.appendCard(cardElement);
+    defaultCardList.prependCard(cardElement);
   }
 }, '.elements');
+
+//submit добавить место
+function handleAddFormSubmit(inputsData) {
+  console.log(inputsData)
+  const userCardList = new Section({
+    data: [{
+      name: inputsData[0],
+      link: inputsData[1],
+    }],
+    renderer: (item) => {
+      const cardElement = renderNewCard(item)
+      userCardList.prependCard(cardElement);
+    }
+  }, '.elements');
+  userCardList.renderItems()
+};
+
+//Открыть popup добавления карточки места пользователем
+function openAddCardPopup() {
+
+  const newPopup = new PopupWithForm('.popup_type_add-card', handleAddFormSubmit)
+  newPopup.open();
+  //newPopup.open(addCardPopup);
+};
 
 //отрисовка карточек по умолчанию
 defaultCardList.renderItems();
@@ -76,29 +100,9 @@ function handleCardClick(name, link) {
   newPopup.open();
 }
 
-//Открыть popup добавления карточки места пользователем
-function openAddCardPopup() {
-  addFormElementValidator.validationOpenPopup()
-  const newPopup = new PopupWithForm('.popup_type_add-card', handleAddFormSubmit)
-  newPopup.open();
-  //newPopup.open(addCardPopup);
-};
 
-//submit добавить место
-function handleAddFormSubmit(inputsData) {
-  console.log(inputsData)
-  const userCardList = new Section({
-    data: [{
-      name: inputsData[0],
-      link: inputsData[1],
-    }],
-    renderer: (item) => {
-      const cardElement = renderNewCard(item)
-      userCardList.prependCard(cardElement);
-    }
-  }, '.elements');
-  userCardList.renderItems()
-};
+
+
 
 //слушатели событий
 //кнопки открытия popup
