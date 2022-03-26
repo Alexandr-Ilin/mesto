@@ -1,5 +1,6 @@
 import { Card } from "../components/Сard.js";
 import Section from "../components/section.js";
+import UserInfo from "../components/UserInfo.js";
 //import Popup from "../components/Popup.js";
 
 import { FormValidator } from "../components/FormValidator.js"
@@ -31,8 +32,8 @@ import PopupWithForm from "../components/PopupWithForm.js";
 const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
 const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
 
-editFormElementValidator.enableValidation()
-addFormElementValidator.enableValidation()
+//editFormElementValidator.enableValidation()
+//addFormElementValidator.enableValidation()
 
 //карточки по умолчанию
 const defaultCardList = new Section({
