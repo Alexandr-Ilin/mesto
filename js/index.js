@@ -1,29 +1,32 @@
 import { Card } from "../components/Сard.js";
 import Section from "../components/section.js";
-import Popup from "../components/Popup.js";
+//import Popup from "../components/Popup.js";
 
 import { FormValidator } from "../components/FormValidator.js"
 
 import {
   initialCards,
-  elements,
+  //elements,
   editButton,
   addButton,
-  profilePopup,
-  addCardPopup,
-  viewPlacePopup,
+  //profilePopup,
+  //addCardPopup,
+  //viewPlacePopup,
   editFormElement,
   addFormElement,
-  inputPlace,
-  inputLink,
+  //inputPlace,
+  //inputLink,
   nameInput,
   jobInput,
   nameProfile,
   jobProfile,
   validationConfig,
-  viewPlaceName,
-  viewImage
+  //viewPlaceName,
+  //viewImage
 } from "../utils/constants.js"
+
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
 const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
@@ -38,7 +41,7 @@ const defaultCardList = new Section({
     const cardElement = renderNewCard(item)
     defaultCardList.appendCard(cardElement);
   }
-}, elements);
+}, '.elements');
 
 //отрисовка карточек по умолчанию
 defaultCardList.renderItems();
@@ -55,53 +58,45 @@ function openEditProfilePopup() {
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
   editFormElementValidator.validationOpenPopup()
-  const newPopup = new Popup(profilePopup)
+  const newPopup = new PopupWithForm('.popup_type_edit-profile', handleProfileFormSubmit)
   newPopup.open();
 };
 
+//callback редактирования данных
+function handleProfileFormSubmit(inputsData) {
+  nameProfile.textContent = inputsData[0];
+  jobProfile.textContent = inputsData[1];
+};
+
+
+//Открыть popup просмотра фото в классе Card
+function handleCardClick(name, link) {
+  const newPopup = new PopupWithImage('.popup_type_view-image', name, link)
+  newPopup.open();
+}
+
 //Открыть popup добавления карточки места пользователем
 function openAddCardPopup() {
-  inputPlace.value = '';
-  inputLink.value = '';
   addFormElementValidator.validationOpenPopup()
-  const newPopup = new Popup(addCardPopup)
+  const newPopup = new PopupWithForm('.popup_type_add-card', handleAddFormSubmit)
   newPopup.open();
   //newPopup.open(addCardPopup);
 };
 
-//Открыть popup просмотра фото в классе Card
-function handleCardClick(name, link) {
-  viewPlaceName.textContent = name;
-  viewImage.alt = name;
-  viewImage.src = link;
-  const newPopup = new Popup(viewPlacePopup)
-  newPopup.open();
-  //openPopup(viewPlacePopup);
-}
-
 //submit добавить место
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
-  newPopup.close();
+function handleAddFormSubmit(inputsData) {
+  console.log(inputsData)
   const userCardList = new Section({
     data: [{
-      name: inputPlace.value,
-      link: inputLink.value,
+      name: inputsData[0],
+      link: inputsData[1],
     }],
     renderer: (item) => {
       const cardElement = renderNewCard(item)
       userCardList.prependCard(cardElement);
     }
-  }, elements);
+  }, '.elements');
   userCardList.renderItems()
-};
-
-//submit редактирования данных
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  nameProfile.textContent = nameInput.value;
-  jobProfile.textContent = jobInput.value;
-  newPopup.close();
 };
 
 //слушатели событий
@@ -110,11 +105,7 @@ editButton.addEventListener('click', openEditProfilePopup);
 addButton.addEventListener('click', openAddCardPopup);
 
 //submit
-editFormElement.addEventListener('submit', handleProfileFormSubmit);
-addFormElement.addEventListener('submit', handleAddFormSubmit);
-
-
-
+//addFormElement.addEventListener('submit', handleAddFormSubmit);
 // //popup
 // profilePopup.addEventListener('click', handlerOverlayClick);
 // addCardPopup.addEventListener('click', handlerOverlayClick);
@@ -155,3 +146,4 @@ addFormElement.addEventListener('submit', handleAddFormSubmit);
 //     closePopup();
 //   };
 // };
+//editFormElement.addEventListener('submit', handleProfileFormSubmit);
