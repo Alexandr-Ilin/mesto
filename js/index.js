@@ -22,6 +22,7 @@ import {
   nameProfile,
   jobProfile,
   validationConfig,
+  elements,
   //viewPlaceName,
   //viewImage
 } from "../utils/constants.js"
@@ -29,60 +30,76 @@ import {
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
+const viewPlacePopup = new PopupWithImage('.popup_type_view-image')
+
 const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
 const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
+
+const section = new Section({ initialCards, renderer }, '.elements')
 
 editFormElementValidator.enableValidation()
 addFormElementValidator.enableValidation()
 
 //карточки по умолчанию
-const defaultCardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
-    const cardElement = renderNewCard(item)
-    defaultCardList.prependCard(cardElement);
-  }
-}, '.elements');
+// const
+//   data: initialCards,
+//   renderer: (item) => {
+//     const cardElement = renderNewCard(item)
+//     defaultCardList.prependCard(cardElement);
+//   }
+// }, '.elements');
+initialCards.forEach(inicialCardsItem => {
+  renderer(inicialCardsItem)
+    // console.log(inicialCardsItem)
+    // debugger
+})
 
-//submit добавить место
-function handleAddFormSubmit(inputsData) {
-  console.log(inputsData)
-  const userCardList = new Section({
-    data: [{
-      name: inputsData[0],
-      link: inputsData[1],
-    }],
-    renderer: (item) => {
-      const cardElement = renderNewCard(item)
-      userCardList.prependCard(cardElement);
-    }
-  }, '.elements');
-  userCardList.renderItems()
-};
-
-//Открыть popup добавления карточки места пользователем
-function openAddCardPopup() {
-
-  const newPopup = new PopupWithForm('.popup_type_add-card', handleAddFormSubmit)
-  newPopup.open();
-  //newPopup.open(addCardPopup);
-};
-
-//отрисовка карточек по умолчанию
-defaultCardList.renderItems();
+//инициирует создание
+function renderer(data) {
+  const cardElement = renderNewCard(data) //создает возвращает
+  section.addItem(cardElement); //отрисовывает
+}
 
 //создание новой карточки
-function renderNewCard(item) {
-  const card = new Card(item, '.elements__template', handleCardClick);
+function renderNewCard(data) {
+  const card = new Card(data, '.elements__template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
+//submit добавить место
+function handleAddFormSubmit(inputsData) {
+  console.log(inputsData)
+    //debugger
+  const card = renderer(inputsData)
+  section.addItem()
+};
+
+//Открыть popup просмотра фото в классе Card
+function handleCardClick(name, link) {
+
+  viewPlacePopup.open(name, link);
+}
+
+const addPlacePopup = new PopupWithForm('.popup_type_add-card', handleAddFormSubmit)
+
+// function renderer(cardElement) {
+//   const cardElement = renderNewCard(item)
+//   section.addItem(cardElement);
+// }
+
+//Открыть popup добавления карточки места пользователем
+function openAddCardPopup() {
+  addPlacePopup.open();
+};
+
 //Открыть popup редактирования профиля
 function openEditProfilePopup() {
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
-  editFormElementValidator.validationOpenPopup()
+  // nameInput.value = nameProfile.textContent;
+  // jobInput.value = jobProfile.textContent;
+  nameInput.value = '';
+  jobInput.value = '';
+  //editFormElementValidator.validationOpenPopup()
   const newPopup = new PopupWithForm('.popup_type_edit-profile', handleProfileFormSubmit)
   newPopup.open();
 };
@@ -93,21 +110,19 @@ function handleProfileFormSubmit(inputsData) {
   jobProfile.textContent = inputsData[1];
 };
 
-
-//Открыть popup просмотра фото в классе Card
-function handleCardClick(name, link) {
-  const newPopup = new PopupWithImage('.popup_type_view-image', name, link)
-  newPopup.open();
-}
+//profilePopup.addEventListener('click', handlerOverlayClick);
+//addFormElement.addEventListener('submit', (e) => console.log(w))
+viewPlacePopup.setEventListeners()
 
 
+editButton.addEventListener('click', openEditProfilePopup);
+addButton.addEventListener('click', openAddCardPopup);
 
 
 
 //слушатели событий
 //кнопки открытия popup
-editButton.addEventListener('click', openEditProfilePopup);
-addButton.addEventListener('click', openAddCardPopup);
+
 
 //submit
 //addFormElement.addEventListener('submit', handleAddFormSubmit);

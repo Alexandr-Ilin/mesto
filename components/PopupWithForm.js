@@ -4,24 +4,16 @@ export default class PopupWithForm extends Popup {
     super(popup)
     this._handleProfileFormSubmit = handleProfileFormSubmit
     this._form = this._popup.querySelector('.form')
-    this._inputs = Array.from(this._form.querySelectorAll('.form__item'))
+    this._inputs = this._form.querySelectorAll('.form__item')
   }
 
   _getInputValues = (evt) => {
-    evt.preventDefault();
-    console.log(this._inputs)
-    const inputsData = this._inputs.map(element => {
-      const value = element.value
-
-      //console.log(element)
-      return value
-        //debugger
-    });
-    this._handleProfileFormSubmit(inputsData)
-    console.log(inputsData)
-      //debugger
+    //evt.preventDefault();
+    const inputsValue = { name: this._inputs[0].value, link: this._inputs[1].value }
+    this._handleProfileFormSubmit(inputsValue)
     this.close()
     this._form.reset()
+    console.log(this._form)
   }
 
   close() {
