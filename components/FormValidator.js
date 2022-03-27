@@ -1,6 +1,9 @@
 export class FormValidator {
   constructor(settings, form) {
-    this._form = form;
+    console.log(form)
+      //debugger
+    this._form = document.querySelector(form);
+
     this._settings = settings;
   }
 

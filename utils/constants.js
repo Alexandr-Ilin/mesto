@@ -31,12 +31,12 @@ export const addButton = document.querySelector('.profile__add-button')
 //для редактирования профиля
 export const nameProfile = document.querySelector('.profile__name');
 export const jobProfile = document.querySelector('.profile__about-self');
-export const editFormElement = document.querySelector('.form_type_edit-profile');
-export const nameInput = editFormElement.querySelector('.form__item_type_name');
-export const jobInput = editFormElement.querySelector('.form__item_type_about');
+//export const editFormElement = document.querySelector('.form_type_edit-profile');
+export const nameInput = document.querySelector('.form__item_type_name');
+export const jobInput = document.querySelector('.form__item_type_about');
 
 //для добавления места
-export const addFormElement = document.querySelector('.form_type_edit-place')
+//export const addFormElement = document.querySelector('.form_type_edit-place')
 export const inputPlace = document.querySelector('.form__item_type_place');
 export const inputLink = document.querySelector('.form__item_type_link');
 

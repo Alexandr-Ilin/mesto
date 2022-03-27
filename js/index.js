@@ -13,8 +13,8 @@ import {
   //profilePopup,
   //addCardPopup,
   //viewPlacePopup,
-  editFormElement,
-  addFormElement,
+  //editFormElement,
+  //addFormElement,
   //inputPlace,
   //inputLink,
   nameInput,
@@ -31,10 +31,8 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 const viewPlacePopup = new PopupWithImage('.popup_type_view-image')
-
-const editFormElementValidator = new FormValidator(validationConfig, editFormElement);
-const addFormElementValidator = new FormValidator(validationConfig, addFormElement);
-
+const editFormElementValidator = new FormValidator(validationConfig, '.form_type_edit-profile');
+const addFormElementValidator = new FormValidator(validationConfig, '.form_type_edit-place');
 const section = new Section({ initialCards, renderer }, '.elements')
 
 editFormElementValidator.enableValidation()
@@ -77,10 +75,9 @@ function handleAddFormSubmit(inputsData) {
 
 //Открыть popup просмотра фото в классе Card
 function handleCardClick(name, link) {
-
   viewPlacePopup.open(name, link);
 }
-
+const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', handleProfileFormSubmit)
 const addPlacePopup = new PopupWithForm('.popup_type_add-card', handleAddFormSubmit)
 
 // function renderer(cardElement) {
@@ -100,8 +97,8 @@ function openEditProfilePopup() {
   nameInput.value = '';
   jobInput.value = '';
   //editFormElementValidator.validationOpenPopup()
-  const newPopup = new PopupWithForm('.popup_type_edit-profile', handleProfileFormSubmit)
-  newPopup.open();
+
+  editProfilePopup.open();
 };
 
 //callback редактирования данных
