@@ -1,9 +1,9 @@
-import { Card } from "../components/Сard.js";
-import Section from "../components/section.js";
-import UserInfo from "../components/UserInfo.js";
-import { FormValidator } from "../components/FormValidator.js"
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
+import { Card } from "./components/Сard.js";
+import Section from "./components/section.js";
+import UserInfo from "./components/UserInfo.js";
+import { FormValidator } from "./components/FormValidator.js"
+import PopupWithImage from "./components/PopupWithImage.js";
+import PopupWithForm from "./components/PopupWithForm.js";
 
 import {
   initialCards,
@@ -12,7 +12,7 @@ import {
   nameInput,
   jobInput,
   validationConfig,
-} from "../utils/constants.js"
+} from "./utils/constants.js"
 
 const userInfo = new UserInfo({
   name: '.profile__name',
@@ -24,6 +24,8 @@ const editProfilePopup = new PopupWithForm('.popup_type_edit-profile', userInfo.
 const addPlacePopup = new PopupWithForm('.popup_type_add-card', renderer)
 const viewPlacePopup = new PopupWithImage('.popup_type_view-image')
 const section = new Section({ initialCards, renderer }, '.elements')
+
+import './index.css'
 
 editFormElementValidator.enableValidation()
 addFormElementValidator.enableValidation()
