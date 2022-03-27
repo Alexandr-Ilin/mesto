@@ -3,6 +3,7 @@ export default class PopupWithImage extends Popup {
   constructor(popup) {
     super(popup)
   }
+
   open = (name, link) => {
     const _viewPlaceName = this._popup.querySelector('.element-view__place');
     const _viewImage = this._popup.querySelector('.element-view__image');
