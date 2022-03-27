@@ -12,14 +12,13 @@ export default class PopupWithForm extends Popup {
     const inputsValue = { name: this._inputs[0].value, link: this._inputs[1].value }
     this._handleProfileFormSubmit(inputsValue)
     this.close()
-    this._form.reset()
   }
 
   close() {
     super.close()
-      //this._form.removeEventListener('submit', this._getInputValues)
+    this._form.reset()
+    this._form.removeEventListener('submit', this._getInputValues)
   }
-
 
   setEventListeners = () => {
     super.setEventListeners()

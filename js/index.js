@@ -2,6 +2,8 @@ import { Card } from "../components/Сard.js";
 import Section from "../components/section.js";
 import UserInfo from "../components/UserInfo.js";
 import { FormValidator } from "../components/FormValidator.js"
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 import {
   initialCards,
@@ -11,9 +13,6 @@ import {
   jobInput,
   validationConfig,
 } from "../utils/constants.js"
-
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
 
 const userInfo = new UserInfo({
   name: '.profile__name',
