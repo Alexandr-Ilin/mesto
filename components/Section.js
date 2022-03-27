@@ -5,10 +5,6 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  // appendCard(element) {
-  //   this._container.append(element)
-  // }
-
   addItem(element) {
     this._container.prepend(element)
   }

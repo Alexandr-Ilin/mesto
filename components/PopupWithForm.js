@@ -8,16 +8,14 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues = (evt) => {
-    //evt.preventDefault();
+    evt.preventDefault();
     const inputsValue = { name: this._inputs[0].value, link: this._inputs[1].value }
     this._handleProfileFormSubmit(inputsValue)
     this.close()
-
-    console.log(this._form)
+    this._form.reset()
   }
 
   close() {
-    this._form.reset()
     super.close()
       //this._form.removeEventListener('submit', this._getInputValues)
   }
