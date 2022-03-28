@@ -9,15 +9,23 @@ export default class PopupWithForm extends Popup {
 
   _getInputValues = (evt) => {
     evt.preventDefault();
-    const inputsValue = { name: this._inputs[0].value, link: this._inputs[1].value }
+    const inputsValue = {}
+    this._inputs.forEach(input => {
+      inputsValue[input.name] = input.value
+    })
+    console.log(inputsValue)
+    debugger
+    // return (inputsValue)
     this._handleProfileFormSubmit(inputsValue)
+
     this.close()
+
   }
 
   close() {
     super.close()
     this._form.reset()
-    this._form.removeEventListener('submit', this._getInputValues)
+      //this._form.removeEventListener('submit', this._getInputValues)
   }
 
   setEventListeners = () => {
@@ -25,3 +33,4 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', this._getInputValues)
   }
 }
+this._handleProfileFormSubmit(this._getInputValues())

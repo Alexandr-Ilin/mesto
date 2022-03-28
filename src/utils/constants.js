@@ -25,8 +25,8 @@ export const initialCards = [{
 ];
 
 //кнопки
-export const editButton = document.querySelector('.profile__edit-button');
-export const addButton = document.querySelector('.profile__add-button')
+export const buttonEdit = document.querySelector('.profile__edit-button');
+export const buttonAdd = document.querySelector('.profile__add-button')
 
 //для редактирования профиля
 export const nameInput = document.querySelector('.form__item_type_name');

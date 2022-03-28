@@ -12,8 +12,10 @@ export default class UserInfo {
     return userData
   }
 
-  setUserInfo = ({ name, link }) => {
+  setUserInfo = (inputsValue) => {
+    console.log(inputsValue)
+      //debugger
     this._name.textContent = name
-    this._character.textContent = link
+    this._character.textContent = about
   }
 }
