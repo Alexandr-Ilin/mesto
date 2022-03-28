@@ -15,13 +15,13 @@ import {
 } from "../utils/constants.js"
 
 const userInfo = new UserInfo({
-  name: '.profile__name',
+  user: '.profile__name',
   character: '.profile__about-self'
 })
 const validatorEditProfileForm = new FormValidator(validationConfig, '.form_type_edit-profile');
 const validatorAddPlaceForm = new FormValidator(validationConfig, '.form_type_edit-place');
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', userInfo.setUserInfo)
-  //const popupAddPlace = new PopupWithForm('.popup_type_add-card', renderer)
+const popupAddPlace = new PopupWithForm('.popup_type_add-card', renderer)
 const popupViewPlace = new PopupWithImage('.popup_type_view-image')
 const section = new Section({ initialCards, renderer }, '.elements')
 
@@ -57,7 +57,7 @@ function openAddCardPopup() {
 //Открыть popup редактирования профиля
 function openpopupEditProfile() {
   const userData = userInfo.getUserInfo()
-  nameInput.value = userData.name;
+  nameInput.value = userData.user;
   jobInput.value = userData.character;
   validatorEditProfileForm.validationOpenPopup()
   popupEditProfile.open();

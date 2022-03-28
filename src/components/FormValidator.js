@@ -54,9 +54,9 @@ export class FormValidator {
   }
 
   enableValidation() {
-    // this._form.addEventListener('submit', function(event) {
-    //   event.preventDefault();
-    // });
+    this._form.addEventListener('submit', function(event) {
+      event.preventDefault();
+    });
     this._addInputListener();
   }
 

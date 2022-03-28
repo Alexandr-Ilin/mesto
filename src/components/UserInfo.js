@@ -1,21 +1,19 @@
 export default class UserInfo {
-  constructor({ name, character }) {
-    this._name = document.querySelector(name)
+  constructor({ user, character }) {
+    this._user = document.querySelector(user)
     this._character = document.querySelector(character)
   }
 
   getUserInfo() {
     const userData = {
-      name: this._name.textContent,
+      user: this._user.textContent,
       character: this._character.textContent
     }
     return userData
   }
 
-  setUserInfo = (inputsValue) => {
-    console.log(inputsValue)
-      //debugger
-    this._name.textContent = name
-    this._character.textContent = about
+  setUserInfo = ({ user, character }) => {
+    this._user.textContent = user
+    this._character.textContent = character
   }
 }
