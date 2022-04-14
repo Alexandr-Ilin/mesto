@@ -69,7 +69,7 @@ function openAddCardPopup() {
 //Открыть popup редактирования профиля
 function openpopupEditProfile() {
   const userData = userInfo.getUserInfo()
-  nameInput.value = userData.user;
+  nameInput.value = userData.name;
   jobInput.value = userData.character;
   validatorEditProfileForm.validationOpenPopup()
   popupEditProfile.open();
