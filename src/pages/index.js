@@ -86,7 +86,6 @@ function handleChengeAvatarFormSubmit(avatar) {
   popupChengeAvatar.hendleLoad(true)
   api.chengeAvatar(avatar)
     .then((res) => {
-      console.log(res)
       userInfo.setUserInfo(res)
     })
     .catch((err) => {
