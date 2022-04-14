@@ -5,10 +5,11 @@ export default class PopupWithForm extends Popup {
     this._handleProfileFormSubmit = handleProfileFormSubmit
     this._form = this._popup.querySelector('.form')
     this._inputs = this._form.querySelectorAll('.form__item')
+    this._button = this._form.querySelector('.form__submit-button')
+    this._text = this._button.textContent
   }
 
   _getInputValues = () => {
-    //evt.preventDefault();
     const inputsValue = {}
     this._inputs.forEach(input => {
       inputsValue[input.name] = input.value
@@ -17,10 +18,17 @@ export default class PopupWithForm extends Popup {
     return (inputsValue)
   }
 
+  hendleLoad(data) {
+    if (data) {
+      this._button.textContent = 'Cохранение...';
+    } else {
+      this._button.textContent = this._text;
+    }
+  }
+
   close() {
     super.close()
     this._form.reset()
-      //this._form.removeEventListener('submit', this._getInputValues)
   }
 
   setEventListeners = () => {
