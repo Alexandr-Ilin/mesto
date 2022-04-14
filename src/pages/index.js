@@ -183,9 +183,9 @@ Promise.all([
     api.getUserData(),
     api.getInitialCards()
   ])
-  .then((arr) => {
-    userInfo.setUserInfo(arr[0])
-    section.renderItems(arr[1], arr[0]._id);
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData)
+    section.renderItems(cards, userData._id);
   })
   .catch((err) => {
     console.log(err);
