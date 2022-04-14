@@ -52,7 +52,7 @@ export class Card {
     this._likeButton = this._element.querySelector('.element__heart')
     this._elementImage = this._element.querySelector('.element__image')
     this._deleteButton = this._element.querySelector('.elements__item-delete')
-    this._numberLikesElemetn = this._element.querySelector('.element__like-number')
+    this._numberLikesElement = this._element.querySelector('.element__like-number')
     this._placeName = this._element.querySelector('.element__place')
     this._elementImage.src = this._link;
     this._elementImage.alt = this._name;
