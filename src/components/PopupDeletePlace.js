@@ -13,6 +13,9 @@ export default class PopupDeletePlace extends Popup {
 
   setEventListeners = () => {
     super.setEventListeners()
-    this._form.addEventListener('submit', (evt) => this._deletePlace(evt, this._card))
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault()
+      this._deletePlace(this._card)
+    })
   }
 }

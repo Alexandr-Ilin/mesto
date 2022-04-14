@@ -51,13 +51,18 @@ function renderNewCard(data, userId) {
       openViewPlacePopup: function(name, link) {
         popupViewPlace.open(name, link)
       },
-      openDeleteCardPopup: deletePlace,
+      openDeleteCardPopup,
       hanldeLikeButton: () => hanldeLikeButton(card, data)
     },
     '.elements__template',
     userId);
   const cardElement = card.generateCard();
   return cardElement;
+}
+
+//Функция открытия попапа
+function openPopupDeleteCard(card) {
+  popupDeletePlace.open(card)
 }
 
 //Открыть popup добавления карточки места пользователем
@@ -67,7 +72,7 @@ function openAddCardPopup() {
 };
 
 //Открыть popup редактирования профиля
-function openpopupEditProfile() {
+function openPopupEditProfile() {
   const userData = userInfo.getUserInfo()
   nameInput.value = userData.name;
   jobInput.value = userData.character;
@@ -98,20 +103,19 @@ function handleChengeAvatarFormSubmit(avatar) {
 }
 
 //Функция удаления карточки
-function deletePlace(evt, card) {
-  if (evt.type === 'submit') {
-    evt.preventDefault()
-    api.deleteCard(card._cardId)
-      .then(() => {
-        card.deletePlace()
-        popupDeletePlace.close()
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  popupDeletePlace.open(card)
+function deletePlace(card) {
+  api.deleteCard(card._cardId)
+    .then(() => {
+      card.deletePlace()
+      popupDeletePlace.close()
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
+
+
+
 
 //Обработка лайков
 function hanldeLikeButton(card) {
@@ -168,7 +172,7 @@ function handleAddCardFormSubmit(data) {
 
 
 //Слушатели
-buttonEdit.addEventListener('click', openpopupEditProfile);
+buttonEdit.addEventListener('click', openPopupEditProfile);
 buttonAdd.addEventListener('click', openAddCardPopup);
 buttonAvatar.addEventListener('click', openChengeAvatarPopup);
 
