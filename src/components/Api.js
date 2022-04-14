@@ -117,7 +117,6 @@ export default class Api {
 
   //смена аватара
   chengeAvatar(avatar) {
-    console.log(avatar)
     return fetch(this._avaUrl, {
         method: 'PATCH',
         headers: this._headers,
