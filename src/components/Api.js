@@ -17,7 +17,10 @@ export default class Api {
         headers: this._headers
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -27,7 +30,10 @@ export default class Api {
         headers: this._headers
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -42,7 +48,10 @@ export default class Api {
         })
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -57,7 +66,10 @@ export default class Api {
         })
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -68,7 +80,10 @@ export default class Api {
         headers: this._headers
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -79,7 +94,10 @@ export default class Api {
         headers: this._headers
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -90,7 +108,10 @@ export default class Api {
         headers: this._headers
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
   }
 
@@ -103,14 +124,10 @@ export default class Api {
         body: JSON.stringify(avatar),
       })
       .then(res => {
-        this._henle(res)
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
       })
-  }
-
-  _henle(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
