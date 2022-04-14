@@ -17,7 +17,7 @@ export default class PopupWithForm extends Popup {
     return (inputsValue)
   }
 
-  hendleLoad(data) {
+  renderLoading(data) {
     if (data) {
       this._button.textContent = 'Cохранение...';
     } else {

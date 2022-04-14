@@ -83,7 +83,7 @@ function openChengeAvatarPopup() {
 
 //Замена аватара
 function handleChengeAvatarFormSubmit(avatar) {
-  popupChengeAvatar.hendleLoad(true)
+  popupChengeAvatar.renderLoading(true)
   api.chengeAvatar(avatar)
     .then((res) => {
       userInfo.setUserInfo(res)
@@ -93,7 +93,7 @@ function handleChengeAvatarFormSubmit(avatar) {
       console.log(err);
     })
     .finally(() => {
-      popupChengeAvatar.hendleLoad(false);
+      popupChengeAvatar.renderLoading(false);
     })
 }
 
@@ -136,7 +136,7 @@ function hanldeLikeButton(card) {
 
 //Редактирование профиля
 function handleProfileFormSubmit(data) {
-  popupEditProfile.hendleLoad(true)
+  popupEditProfile.renderLoading(true)
   api.changeUserData(data)
     .then((data) => {
       userInfo.setUserInfo(data)
@@ -146,13 +146,13 @@ function handleProfileFormSubmit(data) {
       console.log(err);
     })
     .finally(() => {
-      popupEditProfile.hendleLoad(false);
+      popupEditProfile.renderLoading(false);
     })
 }
 
 //Добавление карточки
 function handleAddCardFormSubmit(data) {
-  popupAddPlace.hendleLoad(true)
+  popupAddPlace.renderLoading(true)
   api.addNewCard(data)
     .then((res) => {
       section.addItemPrepend(res, res.owner._id)
@@ -162,7 +162,7 @@ function handleAddCardFormSubmit(data) {
       console.log(err);
     })
     .finally(() => {
-      popupAddPlace.hendleLoad(false);
+      popupAddPlace.renderLoading(false);
     })
 }
 
