@@ -61,7 +61,7 @@ function renderNewCard(data, userId) {
 }
 
 //Функция открытия попапа
-function openPopupDeleteCard(card) {
+function openDeleteCardPopup(card) {
   popupDeletePlace.open(card)
 }
 
@@ -113,9 +113,6 @@ function deletePlace(card) {
       console.log(err);
     });
 }
-
-
-
 
 //Обработка лайков
 function hanldeLikeButton(card) {
