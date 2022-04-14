@@ -9,6 +9,7 @@
 @import url(../blocks/profile/__profile-info/profile__profile-info.css);
 @import url(../blocks/profile/__edit-info/profile__edit-info.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-button/profile__avatar-button.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
@@ -22,11 +23,14 @@
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__heart/element__heart.css);
+@import url(../blocks/element/__like-number/element__like-number.css);
 @import url(../blocks/element/__heart/_active/element__heart_active.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_type/popup_type_edit-profile.css);
 @import url(../blocks/popup/_type/popup_type_add-card.css);
 @import url(../blocks/popup/_type/popup_type_view-image.css);
+@import url(../blocks/popup/_type/popup_type_chenge-avatar.css);
+@import url(../blocks/popup/_type/popup_type_delete-card.css);
 @import url(../blocks/popup/__view-container/popup__view-container.css);
 @import url(../blocks/popup/__form-container/popup__form-container.css);
 @import url(../blocks/popup/__form-header/popup__form-header.css);
