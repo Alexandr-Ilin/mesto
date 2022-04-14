@@ -62,7 +62,7 @@ function renderNewCard(data, userId) {
 
 //Открыть popup добавления карточки места пользователем
 function openAddCardPopup() {
-  validatorAddPlaceForm.validationOpenPopup()
+  validatorAddPlaceForm.validateOpenPopup()
   popupAddPlace.open();
 };
 
@@ -71,13 +71,13 @@ function openpopupEditProfile() {
   const userData = userInfo.getUserInfo()
   nameInput.value = userData.name;
   jobInput.value = userData.character;
-  validatorEditProfileForm.validationOpenPopup()
+  validatorEditProfileForm.validateOpenPopup()
   popupEditProfile.open();
 };
 
 //Открыть popup смены аватара
 function openChengeAvatarPopup() {
-  validatorChengeAvatarForm.validationOpenPopup()
+  validatorChengeAvatarForm.validateOpenPopup()
   popupChengeAvatar.open()
 }
 
@@ -87,6 +87,7 @@ function handleChengeAvatarFormSubmit(avatar) {
   api.chengeAvatar(avatar)
     .then((res) => {
       userInfo.setUserInfo(res)
+      popupChengeAvatar.close()
     })
     .catch((err) => {
       console.log(err);
@@ -139,6 +140,7 @@ function handleProfileFormSubmit(data) {
   api.changeUserData(data)
     .then((data) => {
       userInfo.setUserInfo(data)
+      popupEditProfile.close()
     })
     .catch((err) => {
       console.log(err);
@@ -154,6 +156,7 @@ function handleAddCardFormSubmit(data) {
   api.addNewCard(data)
     .then((res) => {
       section.addItemPrepend(res, res.owner._id)
+      popupAddPlace.close()
     })
     .catch((err) => {
       console.log(err);

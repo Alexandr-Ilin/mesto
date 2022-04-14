@@ -60,7 +60,7 @@ export class FormValidator {
     this._addInputListener();
   }
 
-  validationOpenPopup() {
+  validateOpenPopup() {
     this._inputItems.forEach(inputItem => {
       this._hideError(inputItem)
     })
