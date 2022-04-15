@@ -110,7 +110,6 @@ function handleChengeAvatarFormSubmit(avatar) {
 
 //Функция удаления карточки
 function deletePlace(card) {
-  popupDeletePlace.renderLoading(true)
   api.deleteCard(card._cardId)
     .then(() => {
       card.deletePlace()
@@ -118,9 +117,6 @@ function deletePlace(card) {
     })
     .catch((err) => {
       console.log(err);
-    })
-    .finally(() => {
-      popupDeletePlace.renderLoading(false);
     })
 }
 
