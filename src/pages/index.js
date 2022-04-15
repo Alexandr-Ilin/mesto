@@ -20,10 +20,6 @@ const userInfo = new UserInfo({
   avatar: '.profile__avatar'
 })
 
-// const validatorEditProfileForm = new FormValidator(validationConfig, '.form_type_edit-profile');
-// const validatorAddPlaceForm = new FormValidator(validationConfig, '.form_type_edit-place');
-// const validatorChengeAvatarForm = new FormValidator(validationConfig, '.form_type_chenge-avatar');
-
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', handleProfileFormSubmit)
 const popupAddPlace = new PopupWithForm('.popup_type_add-card', handleAddCardFormSubmit)
 const popupChengeAvatar = new PopupWithForm('.popup_type_chenge-avatar', handleChengeAvatarFormSubmit)
@@ -39,10 +35,6 @@ const api = new Api({
 });
 
 import './index.css'
-
-// validatorEditProfileForm.enableValidation()
-// validatorAddPlaceForm.enableValidation()
-// validatorChengeAvatarForm.enableValidation()
 
 //Объект с формами
 const formValidators = {}
@@ -118,6 +110,7 @@ function handleChengeAvatarFormSubmit(avatar) {
 
 //Функция удаления карточки
 function deletePlace(card) {
+  popupDeletePlace.renderLoading(true)
   api.deleteCard(card._cardId)
     .then(() => {
       card.deletePlace()
@@ -125,7 +118,10 @@ function deletePlace(card) {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => {
+      popupDeletePlace.renderLoading(false);
+    })
 }
 
 //Обработка лайков
