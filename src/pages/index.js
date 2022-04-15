@@ -11,13 +11,11 @@ import {
   buttonAvatar,
   buttonEdit,
   buttonAdd,
-  nameInput,
-  jobInput,
   validationConfig,
 } from "../utils/constants.js"
 
 const userInfo = new UserInfo({
-  name: '.profile__name',
+  user: '.profile__name',
   character: '.profile__about-self',
   avatar: '.profile__avatar'
 })
@@ -73,9 +71,7 @@ function openAddCardPopup() {
 
 //Открыть popup редактирования профиля
 function openPopupEditProfile() {
-  const userData = userInfo.getUserInfo()
-  nameInput.value = userData.name;
-  jobInput.value = userData.character;
+  popupEditProfile.setInputsValues(userInfo.getUserInfo())
   validatorEditProfileForm.validateOpenPopup()
   popupEditProfile.open();
 };

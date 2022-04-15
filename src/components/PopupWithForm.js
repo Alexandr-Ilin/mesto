@@ -4,17 +4,23 @@ export default class PopupWithForm extends Popup {
     super(popup)
     this._handleProfileFormSubmit = handleProfileFormSubmit
     this._form = this._popup.querySelector('.form')
-    this._inputs = this._form.querySelectorAll('.form__item')
+    this._inputList = this._form.querySelectorAll('.form__item')
     this._button = this._form.querySelector('.form__submit-button')
     this._text = this._button.textContent
   }
 
   _getInputValues = () => {
     const inputsValue = {}
-    this._inputs.forEach(input => {
+    this._inputList.forEach(input => {
       inputsValue[input.name] = input.value
     })
     return (inputsValue)
+  }
+
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
   }
 
   renderLoading(data) {
