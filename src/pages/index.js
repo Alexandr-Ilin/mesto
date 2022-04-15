@@ -50,7 +50,6 @@ const formValidators = {}
 // Включение валидации
 const enableValidation = (validationConfig) => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector))
-  console.log(formList)
   formList.forEach((formElement) => {
     const validator = new FormValidator(validationConfig, formElement)
     const formName = formElement.getAttribute('name')
