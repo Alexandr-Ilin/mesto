@@ -19,9 +19,11 @@ const userInfo = new UserInfo({
   character: '.profile__about-self',
   avatar: '.profile__avatar'
 })
-const validatorEditProfileForm = new FormValidator(validationConfig, '.form_type_edit-profile');
-const validatorAddPlaceForm = new FormValidator(validationConfig, '.form_type_edit-place');
-const validatorChengeAvatarForm = new FormValidator(validationConfig, '.form_type_chenge-avatar');
+
+// const validatorEditProfileForm = new FormValidator(validationConfig, '.form_type_edit-profile');
+// const validatorAddPlaceForm = new FormValidator(validationConfig, '.form_type_edit-place');
+// const validatorChengeAvatarForm = new FormValidator(validationConfig, '.form_type_chenge-avatar');
+
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', handleProfileFormSubmit)
 const popupAddPlace = new PopupWithForm('.popup_type_add-card', handleAddCardFormSubmit)
 const popupChengeAvatar = new PopupWithForm('.popup_type_chenge-avatar', handleChengeAvatarFormSubmit)
@@ -38,9 +40,26 @@ const api = new Api({
 
 import './index.css'
 
-validatorEditProfileForm.enableValidation()
-validatorAddPlaceForm.enableValidation()
-validatorChengeAvatarForm.enableValidation()
+// validatorEditProfileForm.enableValidation()
+// validatorAddPlaceForm.enableValidation()
+// validatorChengeAvatarForm.enableValidation()
+
+//Объект с формами
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (validationConfig) => {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector))
+  console.log(formList)
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(validationConfig, formElement)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 //Новая карточка
 function renderNewCard(data, userId) {
@@ -65,20 +84,20 @@ function openDeleteCardPopup(card) {
 
 //Открыть popup добавления карточки места пользователем
 function openAddCardPopup() {
-  validatorAddPlaceForm.validateOpenPopup()
+  formValidators['edit-place'].validateOpenPopup()
   popupAddPlace.open();
 };
 
 //Открыть popup редактирования профиля
 function openPopupEditProfile() {
   popupEditProfile.setInputsValues(userInfo.getUserInfo())
-  validatorEditProfileForm.validateOpenPopup()
+  formValidators['edit-profile'].validateOpenPopup()
   popupEditProfile.open();
 };
 
 //Открыть popup смены аватара
 function openChengeAvatarPopup() {
-  validatorChengeAvatarForm.validateOpenPopup()
+  formValidators['chenge-avatar'].validateOpenPopup()
   popupChengeAvatar.open()
 }
 
