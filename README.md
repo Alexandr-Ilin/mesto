@@ -47,4 +47,4 @@
 
 
 [Ссылка на проект](https://alexandr-ilin.github.io/mesto/ "Учебная работа №9")
-<a href="https://alexandr-ilin.github.io/mesto/" target="_blank">Ссылка на проект</a>
+<a href="https://alexandr-ilin.github.io/mesto/" target="blank">Ссылка на проект html</a>
